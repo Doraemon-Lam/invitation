@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Interactive Envelope</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- 信封容器（负责动画与点击事件） -->
+  <div id="envelope-container" onclick="handleEnvelopeClick()">
+    <!-- SVG 信封 -->
+    <svg
+      class="svg-envelope"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 200 150"
+    >
+      <!-- 信封主体 -->
+      <polygon
+        points="20,50 20,130 180,130 180,50"
+        fill="#FFB74D"
+        stroke="#D2691E"
+        stroke-width="2"
+      />
+      <!-- 信封封口 -->
+      <polygon
+        points="20,50 100,10 180,50"
+        fill="#FFA726"
+        stroke="#D2691E"
+        stroke-width="2"
+        class="flap"
+      />
+    </svg>
+  </div>
+
+  <!-- 信纸容器（初始隐藏） -->
+  <div id="letter-container">
+    <!-- SVG 信纸 -->
+    <svg
+      class="letter"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 300 400"
+    >
+      <!-- 信纸主体 -->
+      <path
+        d="M10,10 Q30,20 50,10 Q70,0 90,10 Q110,20 130,10 Q150,0 170,10 Q190,20 210,10 Q230,0 250,10 Q270,20 290,10
+           L290,390 Q270,380 250,390 Q230,400 210,390 Q190,380 170,390 Q150,400 130,390 Q110,380 90,390
+           Q70,400 50,390 Q30,380 10,390 Z"
+        fill="#FFF8E5"
+        stroke="#D2691E"
+        stroke-width="2"
+      ></path>
+    </svg>
+
+    <!-- 用于显示逐字打印文字的容器 -->
+    <div id="letter-content" class="letter-content"></div>
+
+    <!-- 按钮容器（初始隐藏） -->
+    <div id="button-container" class="button-container">
+      <button id="yes-button" class="btn">Yes</button>
+      <button id="no-button" class="btn">No</button>
+    </div>
+  </div>
+
+  <script>
+    function handleEnvelopeClick() {
+      const envelope = document.getElementById("envelope-container");
+      const letter = document.getElementById("letter-container");
+      const letterContent = document.getElementById("letter-content");
+
+      // 要打印的文字
+      const text = 
+        "Dear 彩琪,\n\n" +
+        "周日有空不？ " +
+        "要不要和我去电咖玩玩游戏呢ʕ ᵔᴥᵔ ʔ \n\n" +
+        "期待你的回复,\n" +
+        "Lin";
+
+      // 让信封淡出
+      envelope.style.opacity = 0;
+      setTimeout(() => {
+        envelope.style.display = "none";
+
+        // 显示信纸，并让其淡入
+        letter.classList.add("active");
+        letter.style.display = "block"; 
+
+        // 打字效果
+        let index = 0;
+        const interval = setInterval(() => {
+          if (index < text.length) {
+            letterContent.textContent += text[index];
+            index++;
+          } else {
+            clearInterval(interval);
+            // 打字完成后显示按钮
+            showButtons();
+          }
+        }, 50);
+      }, 500);
+    }
+
+    function showButtons() {
+      const buttonContainer = document.getElementById("button-container");
+      buttonContainer.classList.add("visible");
+    }
+
+    // 添加事件监听器在 DOM 加载完成后
+    document.addEventListener("DOMContentLoaded", () => {
+      const yesButton = document.getElementById("yes-button");
+      const noButton = document.getElementById("no-button");
+
+      yesButton.addEventListener("click", () => {
+        window.location.href = "https://surl.amap.com/2QC5NI1195Yi";
+      });
+
+      noButton.addEventListener("click", () => {
+        moveButtonRandomly(noButton);
+      });
+    });
+
+    function moveButtonRandomly(button) {
+      const buffer = 20; // 边距，确保按钮不会太靠近屏幕边缘
+      const buttonWidth = button.offsetWidth;
+      const buttonHeight = button.offsetHeight;
+      const windowWidth = window.innerWidth;
+      const windowHeight = window.innerHeight;
+
+      // 计算新的随机位置，确保按钮在窗口内并保留边距
+      const randomX = Math.floor(Math.random() * (windowWidth - buttonWidth - buffer * 2)) + buffer;
+      const randomY = Math.floor(Math.random() * (windowHeight - buttonHeight - buffer * 2)) + buffer;
+
+      // 设置按钮为 fixed 定位
+      button.style.position = "fixed";
+      button.style.left = `${randomX}px`;
+      button.style.top = `${randomY}px`;
+      button.style.transform = 'translate(0, 0)'; // 移除初始的translate
+    }
+  </script>
+</body>
+</html>
