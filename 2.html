@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>致彦妃</title>
+  <style>
+    :root {
+      --company-color: #2b579a; /* 公司主色调 */
+      --highlight-bg: linear-gradient(120deg, #ffd70033 0%, #ffd70033 100%);
+    }
+    
+    body {
+      font-family: "微软雅黑", "Microsoft YaHei", Arial, sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .container {
+      max-width: 800px;
+      width: 90%;
+      margin: 30px auto;
+      padding: 20px;
+    }
+    
+    .section {
+      background: #fff;
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      display: none;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--company-color);
+    }
+    
+    .section.active {
+      display: block;
+      animation: fadeIn 0.6s ease-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes envelopeOpen {
+      0% { transform: perspective(1000px) rotateX(0deg); }
+      50% { transform: perspective(1000px) rotateX(-10deg); }
+      100% { transform: perspective(1000px) rotateX(0deg); }
+    }
+    
+    h1 {
+      margin-top: 0;
+      color: var(--company-color);
+      font-weight: 600;
+    }
+    
+    p {
+      margin: 15px 0;
+      font-size: 16px;
+    }
+    
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 24px;
+      font-size: 16px;
+      text-decoration: none;
+      color: #fff;
+      background-color: var(--company-color);
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .btn:hover {
+      background-color: #1e3d6b;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    
+    .btn:active {
+      transform: translateY(0);
+    }
+    
+    .btn-group {
+      margin-top: 30px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    
+    .btn-group .btn {
+      margin-right: 0;
+      flex: 1;
+      min-width: 120px;
+    }
+    
+    #finalMessage {
+      margin-top: 30px;
+      padding: 20px;
+      background: #f9f9f9;
+      border-radius: 8px;
+      border-left: 4px solid var(--company-color);
+    }
+    
+    .company-font {
+      font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
+      color: var(--company-color);
+      font-weight: bold;
+    }
+    
+    .highlight {
+      background: var(--highlight-bg);
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-weight: 500;
+    }
+    
+    .options-box {
+      display: grid;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    
+    .option-card {
+      border: 1px solid #e3e3e3;
+      padding: 25px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: #fcfcfc;
+    }
+    
+    .option-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      border-color: var(--company-color);
+    }
+    
+    .option-card h3 {
+      margin-top: 0;
+      color: var(--company-color);
+    }
+    
+    progress {
+      width: 60%;
+      height: 8px;
+      accent-color: var(--company-color);
+      margin: 5px 0 15px;
+    }
+    
+    .result-card {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    
+    .result-card h3 {
+      margin-top: 0;
+    }
+    
+    .back-btn {
+      background: none;
+      border: none;
+      color: #666;
+      cursor: pointer;
+      font-size: 14px;
+      margin-top: 20px;
+      display: inline-flex;
+      align-items: center;
+    }
+    
+    .back-btn:hover {
+      color: var(--company-color);
+    }
+    
+    .back-btn::before {
+      content: "←";
+      margin-right: 5px;
+    }
+    
+    @media (max-width: 600px) {
+      .container {
+        padding: 10px;
+        margin: 20px auto;
+      }
+      
+      .section {
+        padding: 20px;
+      }
+      
+      .btn-group {
+        flex-direction: column;
+      }
+      
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 首页 -->
+    <div id="section0" class="section active">
+      <h1>你好，谢谢你能点进来</h1>
+      <p>这是一个小小的念头的延伸<br>只是某个休息日的突发奇想：<br>"如果它能传达心意..."</p>
+      <button class="btn" onclick="showNextSection(0)">▶ 继续查看（预计耗时2分钟）</button>
+    </div>
+
+    <!-- 第一层 -->
+    <div id="section1" class="section">
+      <h1>我们并不熟悉</h1>
+      <p>
+        我们之间保持着完美的职场距离：<br>
+        - 企业微信对话窗口永远整洁<br>
+        - 朋友圈也没有互相点赞<br>
+        - 直到最近和你聊天变多了<br>
+        突然觉得...<br>
+        你是个有趣且爱搞怪的女孩:)<br>
+        我开始留意，开始在意。<br><br>
+      </p>
+      <button class="btn" onclick="showNextSection(1)">▼ 展开草稿箱</button>
+      <button class="back-btn" onclick="goBack(1)">返回上一页</button>
+    </div>
+
+    <!-- 第二层 -->
+    <div id="section2" class="section">
+      <h1>未发送草稿箱</h1>
+      <p>
+        2025.04.04 20:32<br>
+        "北运河的花开了呢"<br>
+        → 删除（担心像拙劣的搭讪）<br><br>
+        
+        2025.04.05 09:15<br>
+        "早呀，这首音乐很适合起床呢"<br>
+        → 删除（笨拙且无厘头）
+
+        2025.04.07 21.00<br>
+        "企业微信聊天就有一种感觉\n你的聊天方式让我很舒服呢:D"<br>
+        → 存为草稿（或许真诚欣赏才是打开心扉的途径）<br><br>
+      </p>
+      <button class="btn" onclick="showNextSection(2)">▷ 查看隐藏字段</button>
+      <button class="back-btn" onclick="goBack(2)">返回上一页</button>
+    </div>
+
+    <!-- 第三层 -->
+    <div id="section3" class="section">
+      <h1>所以我一直没说什么</h1>
+      <p>
+        我很早就加了你的微信。不是一时冲动，也不是想制造尴尬，
+        只是一直没有一个不唐突的契机，不知道怎样开场，才不至于让你觉得被打扰。<br><br>
+        有过几次尝试，也曾在企业微信中与你聊得开心。但一到私人微信，
+        我就不知道该如何延续话题。
+      <button class="back-btn" onclick="goBack(3)">返回上一页</button>
+    </div>
+
+    <!-- 第三层 -->
+    <div id="section4" class="section">
+      <h1>风险评估报告</h1>
+      <p>
+        ▣ 成功率预估：<progress value="30" max="100"></progress><br>
+        ▣ 最大风险：永久进入<span class="company-font">社交黑名单</span><br>
+        ▣ 潜在收益：解锁「彦妃好友位」成就<br><br>
+        
+        经过<span id="decisionDays"></span>天的理性分析后决定：<br>
+        <span class="highlight">让数据归数据，心意归心意</span>
+      </p>
+      <button class="btn" onclick="showNextSection(4)">❓ 查看结果</button>
+      <button class="back-btn" onclick="goBack(4)">返回上一页</button>
+    </div>
+
+    <!-- 第四层 -->
+    <div id="section5" class="section">
+      <h1>可选操作清单</h1>
+      <div class="options-box">
+        <div class="option-card" onclick="selectOption(1)">
+          <h3>Option A：安全模式</h3>
+          <p>• 清空本页浏览记录<br>• 获得「专业同事」皮肤<br>• 下周请你喝咖啡（无暗示版）</p>
+        </div>
+        <div class="option-card" onclick="selectOption(2)">
+          <h3>Option B：开发者模式</h3>
+          <p>• 查看隐藏的GitHub账号<br>• 获取真实朋友圈权限<br>• 开启非工作时段聊天协议</p>
+        </div>
+      </div>
+      <div id="finalMessage"></div>
+      <button class="back-btn" onclick="goBack(4)">返回上一页</button>
+    </div>
+  </div>
+
+  <script>
+    // 访问历史记录
+    let visitHistory = [];
+    const startDay = new Date('2023-11-01'); // 修改为实际添加微信的日期
+    
+    // 显示下一节
+    function showNextSection(currentIndex) {
+      visitHistory.push(currentIndex);
+      const currentSection = document.getElementById(`section${currentIndex}`);
+      const nextIndex = currentIndex + 1;
+      const nextSection = document.getElementById(`section${nextIndex}`);
+      
+      currentSection.classList.remove('active');
+      
+      if (nextSection) {
+        nextSection.style.animation = 'none';
+        void nextSection.offsetWidth; // 触发重绘
+        nextSection.style.animation = 'envelopeOpen 0.6s ease, fadeIn 0.6s ease-out';
+        nextSection.classList.add('active');
+        
+        // 滚动到可视区域
+        setTimeout(() => {
+          nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 50);
+        
+        // 计算犹豫天数
+        if(nextIndex === 3) {
+          const daysDiff = Math.floor((new Date() - startDay) / (1000*60*60*24));
+          document.getElementById('decisionDays').textContent = daysDiff;
+        }
+      }
+    }
+    
+    // 返回上一节
+    function goBack(currentIndex) {
+      if (visitHistory.length > 0) {
+        const prevIndex = visitHistory.pop();
+        document.getElementById(`section${currentIndex}`).classList.remove('active');
+        document.getElementById(`section${prevIndex}`).classList.add('active');
+        
+        setTimeout(() => {
+          document.getElementById(`section${prevIndex}`).scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start'
+          });
+        }, 50);
+      }
+    }
+    
+    // 处理最终选择
+    function selectOption(choice) {
+      const messageDiv = document.getElementById('finalMessage');
+      const optionsBox = document.querySelector('.options-box');
+      
+      optionsBox.style.opacity = '0.5';
+      optionsBox.style.pointerEvents = 'none';
+      
+      if(choice === 1) {
+        messageDiv.innerHTML = `
+          <div class="result-card">
+            <h3>🛡️ 安全模式已启用</h3>
+            <p>本页面将在<span id="countdown">10</span>秒后自动归档<br>
+            <small>（下次见面时，我会表现得像没写过这段代码）</small></p>
+          </div>
+        `;
+        startCountdown();
+      } else {
+        messageDiv.innerHTML = `
+          <div class="result-card">
+            <h3>🔓 开发者模式已解锁</h3>
+            <p>我的真实微信：<span class="highlight">${maskWeChatID('your_wechat')}</span><br>
+            验证暗号：<span class="highlight">"猫猫注释"</span><br><br>
+            <button onclick="location.reload()" class="btn">🔄 重新评估风险</button></p>
+          </div>
+        `;
+      }
+    }
+    
+    // 微信ID打码
+    function maskWeChatID(id) {
+      return id.slice(0, 3) + '*'.repeat(id.length-3);
+    }
+    
+    // 倒计时功能
+    function startCountdown() {
+      let count = 10;
+      const countdown = setInterval(() => {
+        document.getElementById('countdown').textContent = --count;
+        if(count <= 0) {
+          clearInterval(countdown);
+          document.querySelector('.container').style.transition = 'opacity 0.5s ease';
+          document.querySelector('.container').style.opacity = '0';
+          setTimeout(() => {
+            alert('归档完成，感谢你看到这里 🌟');
+          }, 500);
+        }
+      }, 1000);
+    }
+    
+    // 键盘导航支持
+    document.addEventListener('keydown', (e) => {
+      const activeSection = document.querySelector('.section.active');
+      if (!activeSection) return;
+      
+      const currentId = activeSection.id;
+      const currentIndex = parseInt(currentId.replace('section', ''));
+      
+      if (e.key === 'ArrowRight' || e.key === 'Enter') {
+        showNextSection(currentIndex);
+      } else if (e.key === 'ArrowLeft') {
+        goBack(currentIndex);
+      }
+    });
+  </script>
+</body>
+</html>

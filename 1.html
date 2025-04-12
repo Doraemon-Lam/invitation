@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>给你的心声</title>
+  <style>
+    body {
+      font-family: "微软雅黑", Arial, sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+    .section {
+      background: #fff;
+      border-radius: 8px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      display: none;
+    }
+    .section.active {
+      display: block;
+      animation: fadeIn 0.5s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h1 {
+      margin-top: 0;
+    }
+    p {
+      margin: 15px 0;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      text-decoration: none;
+      color: #fff;
+      background-color: #4CAF50;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .btn:hover {
+      background-color: #45a049;
+    }
+    .btn-group {
+      margin-top: 20px;
+    }
+    .btn-group .btn {
+      margin-right: 10px;
+    }
+    #finalMessage {
+      margin-top: 20px;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 首页 -->
+    <div id="section0" class="section active">
+      <h1>你好，Y，欢迎你点进来</h1>
+      <p>这不是一个普通的网页，只是一个小小的念头的延伸。它没有广告、没有推销、也没有打扰，只是我想说一点点话。</p>
+      <button class="btn" onclick="showNextSection(0)">我愿意看看</button>
+    </div>
+
+    <!-- 第一层 -->
+    <div id="section1" class="section">
+      <h1>其实，我们并不熟悉</h1>
+      <p>
+        我们是同事，工作中偶有交集。你大概不会注意，但我在一些交流中，
+        感受到你言语背后的思考与幽默，让我觉得你是个有趣的人。也因此，
+        我开始留意，开始在意。
+      </p>
+      <button class="btn" onclick="showNextSection(1)">我想继续听</button>
+    </div>
+
+    <!-- 第二层 -->
+    <div id="section2" class="section">
+      <h1>所以我一直没说什么</h1>
+      <p>
+        我很早就加了你的微信。不是一时冲动，也不是想制造尴尬，
+        只是一直没有一个不唐突的契机，不知道怎样开场，才不至于让你觉得被打扰。<br><br>
+        有过几次尝试，也曾在企业微信中与你聊得开心。但一到私人微信，
+        我就不知道该如何延续话题。
+      </p>
+      <button class="btn" onclick="showNextSection(2)">你还想听吗？</button>
+    </div>
+
+    <!-- 第三层 -->
+    <div id="section3" class="section">
+      <h1>我不想绕太久了</h1>
+      <p>
+        也许这是冲动，也许是迟来的勇气。我想认识你，不是仅仅作为工作中的同事，
+        而是更生活、更真实的那种了解。<br><br>
+        我尊重你的一切决定，也明白你或许没有同样的意愿，
+        但我希望至少能坦诚地说出来，不留任何遗憾。
+      </p>
+      <button class="btn" onclick="showNextSection(3)">你愿意回应我吗？</button>
+    </div>
+
+    <!-- 第四层：选择 -->
+    <div id="section4" class="section">
+      <h1>最后，是你的选择</h1>
+      <p>
+        这个页面写到这里，也就结束了。<br><br>
+        如果你愿意给我一个机会，我们可以从一次轻松的聊天开始。<br>
+        如果你并不感兴趣，也没有关系，我会真心祝愿你一切顺利，不再打扰。
+      </p>
+      <div class="btn-group">
+        <button class="btn" onclick="finalResponse('positive')">我们聊聊看</button>
+        <button class="btn" onclick="finalResponse('negative')">谢谢你，但……</button>
+      </div>
+      <div id="finalMessage"></div>
+    </div>
+  </div>
+
+  <script>
+    // 函数：显示下一层页面
+    function showNextSection(currentIndex) {
+      var currentSection = document.getElementById("section" + currentIndex);
+      currentSection.classList.remove("active");
+
+      var nextIndex = currentIndex + 1;
+      var nextSection = document.getElementById("section" + nextIndex);
+      if (nextSection) {
+        nextSection.classList.add("active");
+        nextSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+
+    // 函数：处理最后一层的选择
+    function finalResponse(choice) {
+      var messageDiv = document.getElementById("finalMessage");
+      if (choice === "positive") {
+        messageDiv.textContent = "太好了！期待与你的每一次对话。请加我微信，一起轻松聊聊。";
+      } else if (choice === "negative") {
+        messageDiv.textContent = "谢谢你阅读我的真心话。祝愿你未来一切美好。";
+      }
+    }
+  </script>
+</body>
+</html>

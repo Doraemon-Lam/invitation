@@ -1,142 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>小彩琪 :D</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>致彦妃</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <audio id="backgroundMusic" src="background.mp3" loop></audio>
+  <div class="container">
+    <!-- 首页 -->
+    <div id="section0" class="section active">
+      <div class="content-box">
+        <h1>你好，彦妃 :D<br><span class="heart-beat">❤</span></h1>
+        <h2>欢迎你点进来</h2>
+        <p class="subtitle">这是某个大风日的午后<br>当第九次修改的问候语又被删除<br>忽然觉得，或许代码比言语更令人放松</p>
+        <button class="btn pulse" onclick="showNextSection(0)">打开</button>
+      </div>
+    </div>
 
-  <!-- 信封容器（负责动画与点击事件） -->
-  <div id="envelope-container" onclick="handleEnvelopeClick()">
-    <!-- SVG 信封 -->
-    <svg
-      class="svg-envelope"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 200 150"
-    >
-      <!-- 信封主体 -->
-      <polygon
-        points="20,50 20,130 180,130 180,50"
-        fill="#FFB74D"
-        stroke="#D2691E"
-        stroke-width="2"
-      />
-      <!-- 信封封口 -->
-      <polygon
-        points="20,50 100,10 180,50"
-        fill="#FFA726"
-        stroke="#D2691E"
-        stroke-width="2"
-        class="flap"
-      />
-    </svg>
-  </div>
+    <!-- 第一层 -->
+    <div id="section1" class="section">
+      <div class="content-box">
+        <h1>其实，我们并不熟悉</h1>
+        <div class="message-box">
+          <p>我们是同事，工作中偶有交集。你大概不会注意，但我在一些交流中，</p>
+          <p class="highlight">感受到你言语背后的幽默和搞怪</p>
+          <p>让我觉得你是个有趣的人。</p>
+          <p class="emphasis">也因此，我开始留意，开始在意。</p>
+        </div>
+        <button class="btn" onclick="showNextSection(1)">继续聆听</button>
+        <button class="back-btn" onclick="goBack(1)">← 返回</button>
+      </div>
+    </div>
 
-  <!-- 信纸容器（初始隐藏） -->
-  <div id="letter-container">
-    <!-- SVG 信纸 -->
-    <svg
-      class="letter"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 300 400"
-    >
-      <!-- 信纸主体 -->
-      <path
-        d="M10,10 Q30,20 50,10 Q70,0 90,10 Q110,20 130,10 Q150,0 170,10 Q190,20 210,10 Q230,0 250,10 Q270,20 290,10
-           L290,390 Q270,380 250,390 Q230,400 210,390 Q190,380 170,390 Q150,400 130,390 Q110,380 90,390
-           Q70,400 50,390 Q30,380 10,390 Z"
-        fill="#FFF8E5"
-        stroke="#D2691E"
-        stroke-width="2"
-      ></path>
-    </svg>
+    <!-- 第二层 -->
+    <div id="section2" class="section">
+      <div class="content-box">
+        <h1>沉默的日日夜夜</h1>
+        <div class="message-box">
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <p>我很早就加了你的微信。</p>
+              <p>不是一时冲动，但也不想制造尴尬。</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <p>只是苦于没有一个不唐突的契机，</p>
+              <p>也不知道怎样开场，才不至于让你觉得被打扰。</p>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <p>有过几次尝试，也曾在企业微信中与你聊得开心。但一到私人微信，就不知道怎么继续下去。</p>
+          <p class="highlight">原来喜欢会让人<br>
+          既想分享全宇宙<br>
+          又怕打扰一粒尘</p>
+        </div>
+        <button class="btn" onclick="showNextSection(2)">继续聆听</button>
+        <button class="back-btn" onclick="goBack(2)">← 返回</button>
+      </div>
+    </div>
 
-    <!-- 用于显示逐字打印文字的容器 -->
-    <div id="letter-content" class="letter-content"></div>
+    <!-- 第三层 -->
+    <div id="section3" class="section">
+      <div class="content-box">
+        <h1>我不想绕太久了</h1>
+        <div class="message-box">
+          <p>也许这是冲动，也许是迟来的勇气。</p>
+          <p class="emphasis">我想认识你，</p>
+          <p>不是工作关系里的"认识"，</p>
+          <p>而是更生活、更真实的那种了解。</p>
+          <div class="divider"></div>
+          <p>我尊重你的一切决定，</p>
+          <p>也知道你可能没这个意愿。</p>
+          <p class="highlight">但我想至少说出来<br>
+          坦诚一次，不留遗憾</p>
+        </div>
+        <button class="btn" onclick="showNextSection(3)">期待你的选择</button>
+        <button class="back-btn" onclick="goBack(3)">← 返回</button>
+      </div>
+    </div>
 
-    <!-- 按钮容器（初始隐藏） -->
-    <div id="button-container" class="button-container">
-      <button id="yes-button" class="btn">Yes</button>
-      <button id="no-button" class="btn">No</button>
+    <!-- 第四层 -->
+    <div id="section4" class="section">
+      <div class="content-box">
+        <h1>最后，是你的选择</h1>
+        <div class="message-box">
+          <p>这个页面写到这里，也就结束了。</p>
+          <div class="divider"></div>
+          <p class="choice-desc">如果你愿意给我一个机会，<br>我会非常高兴哦。</p>
+          <p class="choice-desc">如果你并不感兴趣，<br>那也没关系，就让这份喜爱作为我心中的秘密吧。</p>
+        </div>
+        <div class="btn-group">
+          <button class="btn choice-btn" onclick="showResponse('positive')">我们聊聊看</button>
+          <button class="btn choice-btn secondary" onclick="showResponse('negative')">谢谢你，但...</button>
+        </div>
+        <div id="responseMessage" class="response-message"></div>
+        <button class="back-btn" onclick="goBack(4)">← 返回</button>
+      </div>
     </div>
   </div>
 
-  <script>
-    function handleEnvelopeClick() {
-      const envelope = document.getElementById("envelope-container");
-      const letter = document.getElementById("letter-container");
-      const letterContent = document.getElementById("letter-content");
-
-      // 要打印的文字
-      const text = 
-        "Dear 彩琪,\n\n" +
-        "周日有空不？ " +
-        "要不要和我去电咖玩玩游戏呢ʕ ᵔᴥᵔ ʔ \n\n" +
-        "期待你的回复,\n" +
-        "Lin";
-
-      // 让信封淡出
-      envelope.style.opacity = 0;
-      setTimeout(() => {
-        envelope.style.display = "none";
-
-        // 显示信纸，并让其淡入
-        letter.classList.add("active");
-        letter.style.display = "block"; 
-
-        // 打字效果
-        let index = 0;
-        const interval = setInterval(() => {
-          if (index < text.length) {
-            letterContent.textContent += text[index];
-            index++;
-          } else {
-            clearInterval(interval);
-            // 打字完成后显示按钮
-            showButtons();
-          }
-        }, 50);
-      }, 500);
-    }
-
-    function showButtons() {
-      const buttonContainer = document.getElementById("button-container");
-      buttonContainer.classList.add("visible");
-    }
-
-    // 添加事件监听器在 DOM 加载完成后
-    document.addEventListener("DOMContentLoaded", () => {
-      const yesButton = document.getElementById("yes-button");
-      const noButton = document.getElementById("no-button");
-
-      yesButton.addEventListener("click", () => {
-        window.location.href = "https://surl.amap.com/2QC5NI1195Yi";
-      });
-
-      noButton.addEventListener("click", () => {
-        moveButtonRandomly(noButton);
-      });
-    });
-
-    function moveButtonRandomly(button) {
-      const buffer = 20; // 边距，确保按钮不会太靠近屏幕边缘
-      const buttonWidth = button.offsetWidth;
-      const buttonHeight = button.offsetHeight;
-      const windowWidth = window.innerWidth;
-      const windowHeight = window.innerHeight;
-
-      // 计算新的随机位置，确保按钮在窗口内并保留边距
-      const randomX = Math.floor(Math.random() * (windowWidth - buttonWidth - buffer * 2)) + buffer;
-      const randomY = Math.floor(Math.random() * (windowHeight - buttonHeight - buffer * 2)) + buffer;
-
-      // 设置按钮为 fixed 定位
-      button.style.position = "fixed";
-      button.style.left = `${randomX}px`;
-      button.style.top = `${randomY}px`;
-      button.style.transform = 'translate(0, 0)'; // 移除初始的translate
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
